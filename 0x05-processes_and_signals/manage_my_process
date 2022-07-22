@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#
+# Indefinitely write text to tmpfile (default '/tmp/my_process')
+
+sleep() {
+  ! read -rt "$1"
+} <> <(:)
+
+while true
+do
+  echo 'I am alive!'
+  sleep 2
+done > "${TMPDIR:-/tmp}/my_process"
