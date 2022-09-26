@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#setting up  a load balancer
+sudo apt-get -y install --no-install-recommends software-properties-common
+sudo add-apt-repository -y ppa:vbernat/haproxy-2.6
+sudo apt-get -y install haproxy=2.6.\*
+cp /etc/default/haproxy default
+echo "ENABLED=1" >> default
+sudo cp default /etc/default/haproxy
+cp /etc/haproxy/haproxy.cfg confd
+echo -e "\n\nfrontend myfrontend\n\tbind :80\n\tdefault_backend myservers" >> confe
+echo -e "\n\nbackend myservers\n\tbalance roundrobin" >> confe
+echo -e "\tserver 13234-web-01 44.200.43.53" >> confe
+echo -e "\tserver 13234-web-02 3.238.104.57\n" >> confe
+sudo cp confe /etc/haproxy/haproxy.cfg
+sudo service haproxy reload
