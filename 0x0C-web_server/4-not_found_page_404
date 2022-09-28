@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#setting up nginx
+sudo apt update
+sudo apt-get -y install nginx
+sudo apt-get -y install ufw
+sudo ufw --force enable
+sudo ufw allow 'Nginx HTTP'
+sudo ufw allow 22/tcp
+echo "Hello World!" > somepage.html
+sudo cp somepage.html /var/www/html/index.html
+sudo sed -i '/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+sudo nginx -s reload
+echo "Ceci n'est pas une page" > somepage2.html
+sudo cp somepage2.html /usr/share/nginx/html/404.html
+sudo sed -i '/listen 80 default_server;/a error_page 404 /404.html;location = /404.html { root /usr/share/nginx/html; internal;}' /etc/nginx/sites-enabled/default
+sudo nginx -s reload

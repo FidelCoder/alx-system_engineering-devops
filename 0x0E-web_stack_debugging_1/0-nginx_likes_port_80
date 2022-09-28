@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#replacing sites-enabled with sites-available
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo /etc/init.d/nginx restart

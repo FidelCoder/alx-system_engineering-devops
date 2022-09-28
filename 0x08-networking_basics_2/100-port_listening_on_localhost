@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#using netcat and telnet
+nc -l 98
