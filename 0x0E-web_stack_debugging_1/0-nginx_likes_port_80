@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-#replacing sites-enabled with sites-available
-sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-sudo /etc/init.d/nginx restart
+# Change port 8080 to 80
+NGINX_CONFIG="/etc/nginx/sites-enabled/default"
+sed -i 's/8080 default_server/80 default_server/g' $NGINX_CONFIG
+service nginx restart
